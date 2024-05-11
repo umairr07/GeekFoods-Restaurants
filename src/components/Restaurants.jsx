@@ -11,12 +11,20 @@ export const Restaurants = ({
   typeOfFoods,
   visitMenu,
 }) => {
+  const star = ["⭐", "⭐", "⭐", "⭐", "⭐"];
+  const starCount = Math.floor(rating);
+
+  let starArr = [];
+  for (let i = 0; i < starCount; i++) {
+    starArr.push(star[i]);
+  }
+
   return (
     <div className="w-[450px] rounded-lg shadow-lg flex flex-col justify-between gap-10">
       <div className="p-3">
         <div className="flex items-center">
           <p className="text-xl font-semibold">{resName}</p>
-          <p className="text-xl pl-2">⭐⭐⭐⭐⭐</p>
+          <p className="text-xl pl-2">{starArr}</p>
         </div>
 
         <div className="text-[#8a8b8d] font-normal">

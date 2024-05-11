@@ -8,6 +8,15 @@ import { data } from "./utils/RestaurantData";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [rating, setRating] = useState(1);
+  const [filteredData, setFilteredData] = useState(data);
+
+  const filterByRating = (e) => {
+    const newRating = parseInt(e.target.value);
+    setRating(newRating);
+
+    const filteredRestaurants = data.filter((item) => item.rating >= newRating);
+    setFilteredData(filteredRestaurants);
+  };
 
   return (
     <div>
@@ -27,15 +36,17 @@ function App() {
               <input
                 type="number"
                 className="border-2 w-[75px] p-2"
+                min={1}
+                max={5}
                 value={rating}
-                onChange={(e) => setRating(e.target.value)}
+                onChange={filterByRating}
               />
             </div>
           </div>
         </div>
 
         <div className="flex flex-wrap justify-evenly gap-10 mt-10 ">
-          {data
+          {filteredData
             .filter((item) =>
               item.name.toLowerCase().includes(inputValue.toLowerCase())
             )
